@@ -1,7 +1,8 @@
 ---
-- name: Start service with healthcheck
-  docker_swarm_service:
-    name: myservice
-    image: nginx
-    published_ports:
-      - "8001:80"
+- name: nginx 배포하기
+  hosts: localhost
+  become: no
+  
+  tasks:
+    - name: nginx
+      command: docker service create mynginx --replicas 3 --constraint node.role==worker --with-registry-auth -p 8008:80 nginx 
