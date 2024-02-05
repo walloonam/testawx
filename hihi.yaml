@@ -8,5 +8,5 @@
       docker_swarm_service:
         name: myservice
         image: nginx:1.13
-      published_ports:
-        - "8001:80"
+        published_ports:
+          - "8001:80"
