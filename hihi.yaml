@@ -1,6 +1,6 @@
 ---
 - name: nginx 배포하기
-  hosts: localhost
+  hosts: all 
   become: yes 
   
   tasks:
