@@ -1,8 +1,14 @@
 ---
-- name: nginx 배포하기
-  hosts: all 
-  become: yes 
+- name: 웹서버 설치
+  hosts: localhost
+  become: yes
   
   tasks:
-    - name: nginx
-      shell: docker service create --name mynginx --replicas 3 --constraint node.role==worker --with-registry-auth -p 8008:80 nginx 
+    - name: Create Nginx Service
+      docker_swarm_service:
+        name: nginx_service
+        image: nginx
+        replicas: 3
+        published_ports:
+          - "8888:80"
+        state: present
