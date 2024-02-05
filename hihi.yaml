@@ -9,6 +9,5 @@
         name: nginx_service
         image: nginx
         replicas: 3
-        publish:
-          - "8888:80"
+        publish: "8888:80"
         state: present
