@@ -12,6 +12,5 @@
           constraints:
             - "node.role==worker"
         publish:
-          published_port: 8080 
-          target_port: 80
+          - "8080:80" 
         image: "nginx:latest"
