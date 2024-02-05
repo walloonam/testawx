@@ -4,5 +4,9 @@
   become: no
   
   tasks:
-    - name: nginx
-      command: docker service create mynginx --replicas 3 --constraint node.role==worker --with-registry-auth -p 8008:80 nginx 
+    - name: Start service with healthcheck
+      docker_swarm_service:
+        name: myservice
+        image: nginx:1.13
+      published_ports:
+        - "8001:80"
