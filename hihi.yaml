@@ -1,10 +1,17 @@
 ---
-- name: nginx 배포하기
+- name: awxtest
   hosts: localhost
-  become: no
-  
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.8
   tasks:
-    - name: Start service with healthcheck
+    - name: Create Docker service
       docker_swarm_service:
-        name: myservice
-        image: nginx:1.13
+        name: test1
+        state: present
+        replicas: 3
+        placement:
+          constraints:
+            - "node.role==worker"
+        args: "--with-registry-auth -p 8001:80"
+        image: "nginx:latest"
